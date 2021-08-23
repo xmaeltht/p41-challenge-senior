@@ -49,6 +49,7 @@ NOTE: This installation may vary accoording to your system
     - terraform
     - tfenv or tfswitch
     - awscli
+    - kubectl
 
 ##### Setup of dependencies
 
@@ -67,39 +68,81 @@ If using tfswitch:
 ```
 * AWS CLI
 
+[Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+Make sure your user has **"Admin"** privileges but is not **"root"** (Best Practices) - Ask your AWS Administrator to create a user for you and send you access keys to be able to use AWS CLI. 
+
 ```sh
 aws configure
 
-AWS Access Key ID [None]: <Your AWS Access Key ID - Ask your administrator>
-AWS Secret Access Key [None]: <Your AWS Secret Access Key - Ask your administrator>
-Default region name [None]: <Your prefer region>
-Default output format [None]: json
+    AWS Access Key ID [None]: <Your AWS Access Key ID - Ask your administrator>
+    AWS Secret Access Key [None]: <Your AWS Secret Access Key - Ask your administrator>
+    Default region name [None]: <Your prefer region>
+    Default output format [None]: json
 ```
 
 Once done with setup the next step is to acctually the running process of the code.
 Here are the step for it:
-```
-# Open terminal anf run these following command
-    $ git clone https://gitlab.com/xmaeltht/p41-senior-challenge.git
 
-    $ cd p41-senior-challenge
+Open terminal anf run these following command: 
 
-# Terraform Initialize and Downloading all the necessary providers
-    $ terraform init
+    git clone https://gitlab.com/xmaeltht/p41-senior-challenge.git
 
-# Terraform plan which shows all the infrastructure that will be deployed
-    $ terraform plan 
+    cd p41-senior-challenge
 
-# Terraform apply which will deploy all the necessary infrastructure on AWS
-# Once all the deployable resources look correct in the plan
-    $ terraform apply 
-```
+Terraform Initialize and Downloading all the necessary providers
+    
+    terraform init
+
+Terraform plan which shows all the infrastructure that will be deployed
+    
+    terraform plan 
+
+Terraform apply which will deploy all the necessary infrastructure on AWS
+Once all the deployable resources look correct in the plan 
+
+    terraform apply 
+
 ###### NOTE 
 This deployment might take some time (~20 mins). Please be **patient**.
 At the end of this deployment a config file will be generate in your current directory in ./p41-eks-config you can add it to your default ~/.kube if you want to. otherwise you will need to provide the path of your config file when running the kubectl command
-Example:    kubectl get node --kubeconfig ./p41-eks-config
-
+Example:    
+```
+kubectl get node --kubeconfig ./p41-eks-config
+```
 output 
+```
+NAME                                       STATUS   ROLES    AGE     VERSION
+ip-10-0-1-86.us-east-2.compute.internal    Ready    <none>   2m52s   v1.21.2-eks-c1718fb
+ip-10-0-2-112.us-east-2.compute.internal   Ready    <none>   2m47s   v1.21.2-eks-c1718fb
+```
+If you decide to add the p41-eks-config into your default kubernetes config file you will run these command:
+```
+    $ cat p41-eks-config >> ~/.kube/config
+# To check if everything looks good run
+    $ kubectl get node 
+```
+
+## Inputs
+
+| Name | Description | Required | Type | Default Value |
+|------|-------------|----------|------|---------------|
+| region | AWS Deployment Region | string | no | "us-east-2" |
+| cluster_name | AWS Cluster Name | string | no | "p41_eks_cluster" |
+| vpc_name | AWS VPC Name | string | no | "p41-vpc-eks" |
+| eksnode_instance_type | EKS Node Instance Type | string | no | "t3a.large" |
+| vpc_cidr | VPC CIDR Block  | string | no | "10.0.0.0/16" |
+| private_subnets | VPC Private Subnets | list | no | ["10.0.1.0/24", "10.0.2.0/24"] |
+| public_subnets | VPC Private Subnets | list | no | ["10.0.100.0/24", "10.0.101.0/24"] |
+
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| cluster_endpoint | Endpoint for EKS control plane. |
+| p41-eks-config| Kubernetes Config on Nodes |
+| region | AWS Deployment Region |
 
 
 ## WARNING ##

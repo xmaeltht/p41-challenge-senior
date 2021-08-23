@@ -55,7 +55,7 @@ NOTE: This installation may vary accoording to your system
 
 There is a few dependencies that need to be setup in order to complet this challenge:
 
-* tfenv or tfswitch need to be set to an older version of terraform v0.13.7 by running:
+* tfenv or tfswitch need to be set to an older version of terraform **v0.13.7** by running:
 
 If using tfenv:
 ```shell
@@ -102,25 +102,26 @@ Once all the deployable resources look correct in the plan
 
     terraform apply 
 
-#### NOTE 
-This deployment might take some time (~20 mins). Please be **patient**.
+#### **NOTE** 
+This deployment might take some time. Please be **patient**.
 At the end of this deployment a config file will be generate in your current directory in ./p41-eks-config you can add it to your default ~/.kube if you want to. otherwise you will need to provide the path of your config file when running the kubectl command
-Example:    
-```
-kubectl get node --kubeconfig ./p41-eks-config
-```
-output 
+**Example:**    
+
+    kubectl get node --kubeconfig ./p41-eks-config
+
+**output** 
 ```
 NAME                                       STATUS   ROLES    AGE     VERSION
 ip-10-0-1-86.us-east-2.compute.internal    Ready    <none>   2m52s   v1.21.2-eks-c1718fb
 ip-10-0-2-112.us-east-2.compute.internal   Ready    <none>   2m47s   v1.21.2-eks-c1718fb
 ```
 If you decide to add the p41-eks-config into your default kubernetes config file you will run these command:
-```
+
     $ cat p41-eks-config >> ~/.kube/config
-# To check if everything looks good run
+To check if everything looks good run
+
     $ kubectl get node 
-```
+
 
 ## Inputs
 

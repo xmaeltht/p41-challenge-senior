@@ -102,7 +102,7 @@ Once all the deployable resources look correct in the plan
 
     terraform apply 
 
-###### NOTE 
+#### NOTE 
 This deployment might take some time (~20 mins). Please be **patient**.
 At the end of this deployment a config file will be generate in your current directory in ./p41-eks-config you can add it to your default ~/.kube if you want to. otherwise you will need to provide the path of your config file when running the kubectl command
 Example:    

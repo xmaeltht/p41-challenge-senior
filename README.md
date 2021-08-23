@@ -46,7 +46,7 @@ There is a few dependencies that need to be install in order to complet this cha
 **NOTE:** This installation may vary according to your system
 
 * Git
-* terraform
+* terraform **v0.13.7**
 * tfenv or [tfswitch](https://warrensbox.medium.com/how-to-manage-different-terraform-versions-for-each-project-51cca80ccece)
 * awscli
 * kubectl

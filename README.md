@@ -43,7 +43,7 @@ Other criteria for evaluation will be:
 
 There is a few dependencies that need to be install in order to complet this challenge:
 
-**NOTE:** This installation may vary accoording to your system
+**NOTE:** This installation may vary according to your system
 
 * Git
 * terraform

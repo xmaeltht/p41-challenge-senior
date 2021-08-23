@@ -45,11 +45,11 @@ There is a few dependencies that need to be install in order to complet this cha
 
 NOTE: This installation may vary accoording to your system
 
-    - Git
-    - terraform
-    - tfenv or tfswitch
-    - awscli
-    - kubectl
+* Git
+* terraform
+* tfenv or [tfswitch](https://warrensbox.medium.com/how-to-manage-different-terraform-versions-for-each-project-51cca80ccece)
+* awscli
+* kubectl
 
 ##### Setup of dependencies
 
